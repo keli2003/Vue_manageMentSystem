@@ -19,7 +19,9 @@
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" class="login_submit">登录</el-button>
+        <el-button @click="submit" type="primary" class="login_submit"
+          >登录</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -51,6 +53,10 @@ export default {
         ],
       },
     };
+  },
+  methods: {
+    // 登录
+    submit() {},
   },
 };
 </script>
