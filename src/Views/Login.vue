@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import Mock from "mockjs";
+import Cookie from "js-cookie";
 export default {
   name: "Login",
   data() {
@@ -56,7 +58,14 @@ export default {
   },
   methods: {
     // 登录
-    submit() {},
+    submit() {
+      // token信息
+      const token = Mock.Random.guid();
+      // token信息存入cookie用于不同页面之间的通信
+      Cookie.set("token", token);
+      // 跳转到首页
+      this.$router.push("/home");
+    },
   },
 };
 </script>

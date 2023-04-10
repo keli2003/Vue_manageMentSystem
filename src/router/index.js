@@ -32,6 +32,7 @@ const routes = [
     // 与之对应的是同级路由Login登录页面
     {
         path: '/login',
+        name: 'login',
         component: Login
     }
 
