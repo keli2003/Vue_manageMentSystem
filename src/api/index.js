@@ -22,3 +22,6 @@ export const deleteUser = (data) => {
     // 返回删除后的用户数据
     return http.post('/user/delete', data)
 }
+export const getMenu = (data) => {
+    return http.post('/permission/getMenu', data)
+}

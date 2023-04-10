@@ -10,7 +10,7 @@ import Main from '../Views/Main.vue'
 import Mall from '../Views/Mall.vue'
 import PageOne from '../Views/PageOne.vue'
 import PageTwo from '../Views/PageTwo.vue'
-import Login from '../Views/Login.vue'
+import login from '../Views/Login.vue'
 
 
 // 2.将路由与组件进行映射
@@ -33,7 +33,7 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: Login
+        component: login
     }
 
 
