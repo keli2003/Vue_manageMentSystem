@@ -26,6 +26,25 @@ Vue.config.productionTip = false
 import './api/mock'
 // 将body中的margin去掉
 document.body.style.margin = "0"
+
+import Cookie from 'js-cookie'
+
+
+// 添加全局路由守卫
+router.beforeEach((to, from, next) => {
+  // token存不存在？
+  const token = Cookie.get('token')
+  // token不存在，说明用户没有登录，应该跳转至登录页面
+  if (!token && to.name !== 'login') {
+    next({ name: 'login' })
+
+  } else if (token && to.name === 'login') {
+    // token存在，说明用户此时登录，应该跳转至首页
+    next({ name: 'home' })
+  } else {
+    next()
+  }
+})
 new Vue({
   // 挂载router
   router,
