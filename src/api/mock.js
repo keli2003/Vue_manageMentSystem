@@ -1,5 +1,6 @@
 import Mock from 'mockjs'
 import homeApi from './mockServerData/home'
+import permission from './mockServerData/permission'
 import user from './mockServerData/user'
 
 // Mock.mock('/api/home/getData', 'get', function () {
@@ -15,3 +16,5 @@ Mock.mock('/api/user/edit', 'post', user.updateUser)
 Mock.mock('/api/user/delete', 'post', user.deleteUser)
 // 当接口出现404的时候可以给mock的接口改为正则
 Mock.mock(/api\/user\/getUser/, user.getUserList)
+
+Mock.mock(/api\/permission\/getMenu/, 'post', permission.getMenu)
