@@ -10,11 +10,13 @@ import Main from '../Views/Main.vue'
 import Mall from '../Views/Mall.vue'
 import PageOne from '../Views/PageOne.vue'
 import PageTwo from '../Views/PageTwo.vue'
+import Login from '../Views/Login.vue'
 
 
 // 2.将路由与组件进行映射
 const routes = [
     // 主路由
+    // 主页下面的内容
     {
         path: '/', component: Main,
         redirect: '/home',   //重定向
@@ -27,6 +29,11 @@ const routes = [
             { path: 'page2', name: 'page2', component: PageTwo } // 页面2
         ]
     },
+    // 与之对应的是同级路由Login登录页面
+    {
+        path: '/login',
+        component: Login
+    }
 
 
 ]

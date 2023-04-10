@@ -55,7 +55,7 @@ export default {
             address: address,
             age: age,
             gender: gender,
-            birth: birth,
+            birth: birth
         })
         return {
             code: 20000,
