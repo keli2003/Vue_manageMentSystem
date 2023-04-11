@@ -30,7 +30,7 @@
 
 <script>
 import Cookie from "js-cookie";
-import { getMenu } from "../api";
+import { getMenu } from "../api/index";
 export default {
   name: "Login",
   data() {
@@ -69,16 +69,22 @@ export default {
       // form表单的校验通过
       this.$refs.form.validate((valid) => {
         if (valid) {
-          getMenu(this.form).then(({ data }) => {
-            console.log(data);
-            console.log(this.form);
-            if (data.code === 20000) {
+          getMenu(this.form).then(({ data: res }) => {
+            console.log(res, "data");
+            if (res.code === 20000) {
               // token信息存入cookie用于不同页面之间的通信
-              Cookie.set("token", data.data.token);
+              Cookie.set("token", res.data.token);
+
+              console.log(res.data.meun);
+              // 获取菜单数据 存入store中
+              this.$store.commit("setMenu", res.data.menu);
+
+              this.$store.commit("addMenu", this.$router);
+
               // 跳转到首页
-              this.$router.push("/home");
+              this.$router.push({ name: "home" });
             } else {
-              this.$message.error(data.data.message);
+              this.$message.error(res.data.message);
             }
           });
           // getMenu();

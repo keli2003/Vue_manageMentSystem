@@ -1,8 +1,9 @@
+import router from "@/router"
+import Cookie from "js-cookie"
 export default {
     name: 'Tab',
     state: {
         isCollapse: false, // 用于控制菜单的展开 
-
         tabsList: [
             {
                 path: '/',
@@ -11,7 +12,8 @@ export default {
                 icon: 's-home',
                 url: 'Home/Home'
             },
-        ] // 面包屑的数据
+        ],// 面包屑的数据
+        menu: []
     },
     mutations: {
         //修改菜单展开的方法
@@ -35,6 +37,39 @@ export default {
             // console.log('调用成功', item);
             const index = state.tabsList.findIndex(val => val.name == item.name)
             state.tabsList.splice(index, 1)
+        },
+
+        // 设置Menu的数据
+        setMenu(state, val) {
+            state.menu = val
+            Cookie.set('menu', JSON.stringify(val))
+        },
+        // 动态注册路由
+        addMenu(state, val) {
+            // 缓存中是否存在数据
+            if (!Cookie.get('menu')) return
+            const menu = JSON.parse(Cookie.get('menu'))
+            state.menu = menu
+            // 组装动态路由的数据
+            const menuArray = []
+            menu.forEach(item => {
+                // 判断是否有子菜单
+                if (item.children) {
+                    item.children = item.children.map(item => {
+                        item.component = () => import(`../Views/${item.url}`)
+                        return item
+                    })
+                    menuArray.push(...item.children)
+                } else {
+                    item.component = () => import(`../Views/${item.url}`)
+                    menuArray.push(item)
+                }
+            });
+            console.log(menuArray, 'menuArray');
+            // 路由的动态添加
+            menuArray.forEach(item => {
+                router.addRoute('Main', item)
+            })
         }
     }
 }

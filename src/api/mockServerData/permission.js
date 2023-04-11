@@ -2,8 +2,11 @@
 import Mock from 'mockjs'
 export default {
     getMenu: config => {
+        console.log(config);
         const { username, password } = JSON.parse(config.body)
-        // 判断用户是否存在
+        // console.log();
+        // console.log(JSON.parse(config.body))
+        // 先判断用户是否存在
         // 判断账号和密码是否对应
         if (username === 'admin' && password === 'admin') {
             return {
@@ -11,25 +14,25 @@ export default {
                 data: {
                     menu: [
                         {
-                            path: '/',
+                            path: '/home',
                             name: 'home',
                             label: '首页',
                             icon: 's-home',
-                            url: 'home/index'
+                            url: 'Home.vue'
                         },
                         {
                             path: '/mall',
                             name: 'mall',
                             label: '商品管理',
                             icon: 'video-play',
-                            url: 'mall/index'
+                            url: 'Mall.vue'
                         },
                         {
                             path: '/user',
                             name: 'user',
                             label: '用户管理',
                             icon: 'user',
-                            url: 'user/index'
+                            url: 'User.vue'
                         },
                         {
                             label: '其他',
@@ -40,45 +43,42 @@ export default {
                                     name: 'page1',
                                     label: '页面1',
                                     icon: 'setting',
-                                    url: 'other/pageOne'
-
-                                }, {
+                                    url: 'PageOne.vue'
+                                },
+                                {
                                     path: '/page2',
                                     name: 'page2',
                                     label: '页面2',
                                     icon: 'setting',
-                                    url: 'other/pageTwo'
+                                    url: 'PageTwo.vue'
                                 }
                             ]
                         }
                     ],
-                    // 获取到当前的token
                     token: Mock.Random.guid(),
                     message: '获取成功'
-
                 }
             }
-        } else if (username === 'xiaoming' && password === 'xiaoxiao') {
+        } else if (username === 'xiaoxiao' && password === 'xiaoxiao') {
             return {
                 code: 20000,
                 data: {
                     menu: [
                         {
-                            path: '/',
+                            path: '/home',
                             name: 'home',
                             label: '首页',
                             icon: 's-home',
-                            url: 'home/index'
+                            url: 'Home.vue'
                         },
                         {
-                            path: '/mall',
-                            name: 'mall',
+                            path: '/video',
+                            name: 'video',
                             label: '商品管理',
                             icon: 'video-play',
-                            url: 'mall/index'
-                        },
+                            url: 'Mall.vue'
+                        }
                     ],
-                    // 获取到当前的token
                     token: Mock.Random.guid(),
                     message: '获取成功'
                 }
@@ -87,9 +87,10 @@ export default {
             return {
                 code: -999,
                 data: {
-                    message: '登录失败'
+                    message: '密码错误'
                 }
             }
         }
+
     }
 }
